@@ -1,0 +1,131 @@
+
+
+var ballx=300;
+var bally=300;
+var ballSize=40;
+var score=0;
+var gameState= "L1";
+var img2; 
+var img3;
+
+function preload () {
+// preload () runs once, it may make you wait 
+// img= loadImage ('doggie.png'); // doggie.png needs to be next to this .js file 
+// you can link to an image on your github account
+  img2 = loadImage('https://kenyenbuilds.github.io/doggie.png')
+  img3 = loadImage('https://kenyenbuilds.github.io/soccerpost.png')
+}
+
+
+function setup() {
+createCanvas(600,600);
+textAlign(CENTER);
+textSize(20);
+  
+  
+} // end setup
+
+function draw() {
+background(220);
+if(gameState == "L1"){
+  levelOne();
+}
+if(gameState == "L2"){
+  levelTwo();
+}
+  if(gameState == "L3"){
+    levelThree();
+  }
+  
+    if(gameState == "youWin"){
+    youWin();
+  }
+  
+ text(("Score= " + score), width/2, 40);
+} // end draw
+
+function levelOne(){
+  text("Level 1", width/2, height-20);
+  var distToBall= dist(ballx, bally, mouseX, mouseY);
+ if(distToBall<ballSize/2){
+   ballx=random(width);
+   bally=random(height);
+   score=score+1;
+ }// end of it stmt
+ 
+ if(score>= 5){
+   gameState = "L2";
+ }
+ 
+  ellipse(ballx, bally, ballSize, ballSize);
+  line(ballx, bally, mouseX, mouseY);
+} //end of levelOne 
+
+function levelTwo(){
+  background(200,100,0);
+  text("Level 2!", width/2, height-20);
+  var distToBall= dist(ballx, bally, mouseX, mouseY);
+ if(distToBall<ballSize/2){
+   ballx=random(width);
+   bally=random(height);
+   score=score+1;
+ }// end of it stmt
+ 
+ if(score>10){
+   gameState = "L3";
+ }
+ 
+  ellipse(ballx, bally, ballSize, ballSize);
+  //line(ballx, bally, mouseX, mouseY);
+} //end of level 2 
+
+function levelThree(){
+  background(0,100,200);
+  text("Level 3", width/2, height-20);
+  var distToBall= dist(ballx, bally, mouseX, mouseY);
+ if(distToBall<ballSize/2){
+   ballx=random(width);
+   bally=random(height);
+   score=score+1;
+   ballSize = ballSize -1;
+ }// end of it stmt
+ 
+ if(score>15){
+   background(random(255),random(255),random(255));
+ }
+ 
+  ellipse(ballx, bally, ballSize, ballSize);
+  //line(ballx, bally, mouseX, mouseY);
+} //end of level 3
+
+
+
+
+function levelThree(){
+    background(200, 100, 2000);
+  text("Level 4", width/2, height-20);
+  var distToBall= dist(ballx, bally, mouseX, mouseY);
+  if (distToBall <ballSize/2){
+    ballx = random(width);
+    bally= random(height);
+    ballSize=ballSize -1;
+    score= score +1;
+  }
+  if(score>29){
+// youWin
+   gameState = "youWin";
+   
+
+  }
+  
+//  line(ballx, bally, mouseX, mouseY);
+//  ellipse(ballx, bally, ballSize, ballSize);
+  
+  image(img2,ballx-ballSize/2, bally-ballSize/2, ballSize, ballSize);
+} // end level four
+
+function youWin(){
+  background('red');
+background(img3);
+  text (("GOALLLLLLLL"), width/2, 60);
+}
